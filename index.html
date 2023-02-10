@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Jokes</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: black;
+            height: 42rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .container{
+            padding: 25px;
+            background-color: white;
+            border-radius:15px ;
+            width: 700px;
+        }
+        .container h3{
+            padding: 27px 46px;
+            font-size: 30px;
+        }
+        #joke{
+            font-size: 25px;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+        .btn{
+            background-color: yellow;
+            color: black;
+            padding: 5px 6px;
+            border-radius: 5px;
+            margin: 12px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>😍 Best Jokes to make your day 👻</h3>
+        <div id="joke" class="joke">Awesome juke is loading....</div>
+        <button id="jokebtn" class="btn">Next JOKE</button>
+    </div>
+    <script>
+        const jokes = document.querySelector('#joke')
+        const jokebtn = document.querySelector('#jokebtn')
+
+        const generatejokes = async()=>{
+            try{
+                const setHeaders={
+                    headers:{
+                        Accept:"application/json"
+                    }
+                }
+            const res = await fetch('https://icanhazdadjoke.com',setHeaders)
+            const data = await res.json();
+            jokes.innerHTML = data.joke;
+            }catch(err){
+                console.log(err)
+            }
+            
+        }
+
+        jokebtn.addEventListener('click',generatejokes)
+        generatejokes()
+    </script>
+</body>
+</html>
